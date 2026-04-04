@@ -1,0 +1,12 @@
+.git
+.github
+.gitignore
+__pycache__
+*.py[cod]
+.pytest_cache
+.venv
+venv
+*.db
+*.md
+Jenkinsfile
+Aceest*.py
