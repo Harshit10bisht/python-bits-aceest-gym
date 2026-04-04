@@ -87,7 +87,7 @@ docker run --rm aceest-fitness:test
 
 | Aspect | GitHub Actions (`.github/workflows/main.yml`) | Jenkins (`Jenkinsfile`) |
 |--------|-----------------------------------------------|-------------------------|
-| **When it runs** | On every **push** and **pull_request** to `main` | When the Jenkins job is triggered (SCM polling, webhook, or manual) |
+| **When it runs** | On every **push** and **pull_request** (all branches) | When the Jenkins job is triggered (SCM polling, webhook, or manual) |
 | **Purpose** | Fast feedback on GitHub for all contributors | Controlled **build server** (lab or on-prem) that mirrors a dedicated integration environment |
 | **Steps** | Install Python deps → **Ruff** + **compileall** → build Docker **test** target → **`docker run`** to execute Pytest in the container | Checkout → venv → lint + compile → **Pytest on agent** → Docker test image + container Pytest → runtime image build |
 
