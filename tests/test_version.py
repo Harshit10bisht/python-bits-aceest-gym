@@ -4,7 +4,7 @@ import os
 def test_version_default(client):
     r = client.get("/version")
     assert r.status_code == 200
-    assert r.get_json() == {"version": "v1"}
+    assert r.get_json() == {"version": "v2"}
 
 
 def test_version_env_override(monkeypatch, tmp_path):

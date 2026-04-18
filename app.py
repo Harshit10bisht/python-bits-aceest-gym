@@ -7,7 +7,14 @@ import sqlite3
 
 from flask import Flask, Response, g, jsonify, request
 
-from fitness_core import PROGRAMS, compute_calories, init_db, progress_week_label
+from fitness_core import (
+    PROGRAMS,
+    WORKOUTS,
+    compute_calories,
+    init_db,
+    progress_week_label,
+    workouts_for,
+)
 
 
 def create_app(db_path: str | None = None) -> Flask:
@@ -34,7 +41,18 @@ def create_app(db_path: str | None = None) -> Flask:
 
     @app.get("/version")
     def version() -> Response:
-        return jsonify({"version": os.environ.get("APP_VERSION", "v1")})
+        return jsonify({"version": os.environ.get("APP_VERSION", "v2")})
+
+    @app.get("/workouts")
+    def list_all_workouts() -> Response:
+        return jsonify(WORKOUTS)
+
+    @app.get("/workouts/<program>")
+    def list_program_workouts(program: str) -> tuple[Response, int]:
+        try:
+            return jsonify({"program": program, "workouts": workouts_for(program)}), 200
+        except KeyError:
+            return jsonify({"error": f"Unknown program: {program}"}), 404
 
     @app.get("/programs")
     def list_programs() -> Response:

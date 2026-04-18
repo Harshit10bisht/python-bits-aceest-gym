@@ -11,6 +11,30 @@ PROGRAMS: dict[str, dict[str, float]] = {
     "Beginner (BG)": {"factor": 26},
 }
 
+WORKOUTS: dict[str, list[str]] = {
+    "Fat Loss (FL)": [
+        "20-min HIIT (intervals 30/30)",
+        "Full-body circuit (3 rounds)",
+        "Steady-state cardio (30 min)",
+    ],
+    "Muscle Gain (MG)": [
+        "Push: bench, OHP, dips",
+        "Pull: deadlift, rows, pull-ups",
+        "Legs: squat, RDL, lunges",
+    ],
+    "Beginner (BG)": [
+        "Bodyweight squats 3x10",
+        "Push-ups (knee or full) 3x8",
+        "Plank 3x30s + walking 20 min",
+    ],
+}
+
+
+def workouts_for(program_name: str) -> list[str]:
+    if program_name not in WORKOUTS:
+        raise KeyError(f"Unknown program: {program_name}")
+    return list(WORKOUTS[program_name])
+
 
 def compute_calories(weight_kg: float, program_name: str) -> int:
     if program_name not in PROGRAMS:
