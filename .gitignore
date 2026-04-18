@@ -11,3 +11,8 @@ venv/
 .idea/
 .vscode/
 .DS_Store
+coverage.xml
+pytest-junit.xml
+.coverage
+.scannerwork/
+
