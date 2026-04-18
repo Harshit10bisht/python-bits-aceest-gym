@@ -32,6 +32,10 @@ def create_app(db_path: str | None = None) -> Flask:
     def health() -> Response:
         return jsonify({"status": "ok"})
 
+    @app.get("/version")
+    def version() -> Response:
+        return jsonify({"version": os.environ.get("APP_VERSION", "v1")})
+
     @app.get("/programs")
     def list_programs() -> Response:
         return jsonify(
