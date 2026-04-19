@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: YOUR_DOCKERHUB_USER/aceest-fitness:v1
+          image: hbisht1210/aceest-fitness:v1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000

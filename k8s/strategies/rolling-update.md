@@ -16,7 +16,7 @@ kubectl -n aceest get pods -w &
 
 # Roll forward to v2 image (in-place rolling update of the v1 Deployment)
 kubectl -n aceest set image deployment/aceest-v1 \
-    app=YOUR_DOCKERHUB_USER/aceest-fitness:v2
+    app=hbisht1210/aceest-fitness:v2
 kubectl -n aceest set env deployment/aceest-v1 APP_VERSION=v2
 
 kubectl -n aceest rollout status deployment/aceest-v1

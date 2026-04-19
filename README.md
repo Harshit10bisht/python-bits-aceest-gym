@@ -6,8 +6,8 @@ Flask REST API for client and progress management, ported from the original Tkin
 
 | Version | Branch / tag | Image | Endpoints added |
 |---------|--------------|-------|-----------------|
-| **v1**  | `v1.0.0` tag (commit before `feature/v2` merge) | `YOUR_DOCKERHUB_USER/aceest-fitness:v1` | core API + `/version` |
-| **v2**  | `main` (post-merge of `feature/v2`), tag `v2.0.0` | `YOUR_DOCKERHUB_USER/aceest-fitness:v2` and `:latest` | adds `/workouts`, `/workouts/<program>` |
+| **v1**  | `v1.0.0` tag (commit before `feature/v2` merge) | `hbisht1210/aceest-fitness:v1` | core API + `/version` |
+| **v2**  | `main` (post-merge of `feature/v2`), tag `v2.0.0` | `hbisht1210/aceest-fitness:v2` and `:latest` | adds `/workouts`, `/workouts/<program>` |
 
 The same image is parameterised with the `APP_VERSION` environment variable so both Deployments can be observed in the same cluster.
 
@@ -177,7 +177,7 @@ GitHub  --(pollSCM/webhook)-->  Jenkins
 1. Create a public Docker Hub repository named `aceest-fitness`.
 2. Generate a Personal Access Token (Account Settings -> Security).
 3. In Jenkins -> Manage Credentials, add a **Username with password** credential with ID **`dockerhub`** (username = your Docker Hub user, password = the PAT).
-4. Replace every occurrence of `YOUR_DOCKERHUB_USER` in this repo with your Docker Hub user. The placeholders live in:
+4. Replace every occurrence of `hbisht1210` in this repo with your Docker Hub user. The placeholders live in:
    - [`Jenkinsfile`](Jenkinsfile) (the `DOCKERHUB_USER` env)
    - [`k8s/10-deployment-v1.yaml`](k8s/10-deployment-v1.yaml), [`k8s/11-deployment-v2.yaml`](k8s/11-deployment-v2.yaml), [`k8s/strategies/shadow-deployment.yaml`](k8s/strategies/shadow-deployment.yaml)
    - The strategy markdown files under [`k8s/strategies/`](k8s/strategies)
@@ -185,7 +185,7 @@ GitHub  --(pollSCM/webhook)-->  Jenkins
 Quick replace on Linux/macOS:
 
 ```bash
-grep -rl YOUR_DOCKERHUB_USER . | xargs sed -i 's/YOUR_DOCKERHUB_USER/<your-handle>/g'
+grep -rl hbisht1210 . | xargs sed -i 's/hbisht1210/<your-handle>/g'
 ```
 
 PowerShell:
@@ -193,7 +193,7 @@ PowerShell:
 ```powershell
 Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notmatch '\\.git\\' } |
   ForEach-Object {
-    (Get-Content $_.FullName) -replace 'YOUR_DOCKERHUB_USER', '<your-handle>' |
+    (Get-Content $_.FullName) -replace 'hbisht1210', '<your-handle>' |
       Set-Content $_.FullName
   }
 ```
@@ -215,7 +215,7 @@ git checkout main
 ## SonarCloud setup (one-time)
 
 1. Sign in to https://sonarcloud.io with GitHub and import the repo.
-2. Note the **organization** and **project key** SonarCloud assigns; replace `YOUR_SONAR_ORG` and `YOUR_SONAR_PROJECT_KEY` in [`sonar-project.properties`](sonar-project.properties).
+2. Note the **organization** and **project key** SonarCloud assigns; replace `YOUR_DOCKERHUB_USER` and `YOUR_SONAR_ORG` in [`sonar-project.properties`](sonar-project.properties).
 3. Generate a token (My Account -> Security) and add it in Jenkins as a **Secret text** credential with ID **`sonarcloud-token`**.
 4. In Jenkins -> Manage Jenkins -> System, add a SonarQube server entry named exactly **`SonarCloud`** (matches the `SONAR_SERVER` env in the Jenkinsfile), URL `https://sonarcloud.io`, Authentication token = `sonarcloud-token`.
 5. Install Jenkins plugins: **SonarQube Scanner**, **Docker Pipeline**, **Pipeline Utility Steps**, **Kubernetes CLI**.

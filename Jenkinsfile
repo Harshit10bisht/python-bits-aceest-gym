@@ -13,7 +13,7 @@ pipeline {
     }
 
     environment {
-        DOCKERHUB_USER = 'YOUR_DOCKERHUB_USER'
+        DOCKERHUB_USER = 'hbisht1210'
         IMAGE_REPO     = "${DOCKERHUB_USER}/aceest-fitness"
         IMAGE_TEST     = "aceest-fitness:test-${env.BUILD_NUMBER}"
         SONAR_SERVER   = 'SonarCloud'
